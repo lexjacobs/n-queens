@@ -40,9 +40,21 @@ var n3maker = function(){
       }
     }
   }
-  console.log(results);
+  //console.log(results);
   return results;
-}();
+};
+
+ var boardSet = n3maker();
+
+ for( var n in boardSet){
+  var thisBoard = new Board(boardSet[n]);
+     if(thisBoard.hasAnyColConflicts()){
+      delete boardSet[n];
+     }
+ }
+
+ console.log(boardSet);
+
 
 
 
