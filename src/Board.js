@@ -1,3 +1,4 @@
+/* global _  */
 // This file is a Backbone Model (don't worry about what that means)
 // It's part of the Board Visualizer
 // The only portions you need to work on are the helper functions (below)
@@ -79,26 +80,78 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var row = this._currentAttributes[rowIndex];
+      // console.log(row);
+      var sum = _.reduce(row, function(a, b){
+        return a + b;
+      }, 0);
+
+      // var sum = 0;
+      // console.log(sum);
+
+      // if(sum >= 2){
+      //   return true;
+      // }
+      // return false;
+
+      // ### small change: was <= 2. changed to >= 2. ###
+      return sum >= 2;
+
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var numRows = this._currentAttributes.n;
+
+      for (var i = 0; i < numRows; i++){
+        var test = this.hasRowConflictAt(i);
+        if(test === true){
+          return true;
+        }
+      }
+      return false;
     },
-
-
 
     // COLUMNS - run from top to bottom
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // reduce
+
+      // var grid = this._currentAttributes;
+      // //console.log(this);
+      // console.log(grid);
+
+      // var sum = _.reduce(_.first(_.something(grid, colIndex), function(a,b){
+      //   return a + b;
+      // }, 0);
+
+      //for loop
+
+      var allColumns = this._currentAttributes;
+      var sum = 0;
+      var reps = this._currentAttributes.n;
+
+      for(var i = 0; i < reps; i++){
+        sum += allColumns[i][colIndex];
+      }
+
+
+      return sum >= 2;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+
+      var numColumns = this._currentAttributes.n;
+
+      for(var i = 0; i < numColumns; i++){
+        var test = this.hasColConflictAt(i);
+        if(test === true){
+          return true;
+        }
+      }
       return false; // fixme
     },
 
@@ -109,12 +162,28 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var start = majorDiagonalColumnIndexAtFirstRow;
+      var sum = 0;
+      var reps = this._currentAttributes.n;
+      for(var i = 0; i < reps; i++){
+        if(this._currentAttributes[i][start+i] !== undefined){
+          sum += this._currentAttributes[i][start+i];
+        }
+      }
+
+      return sum >= 2;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var reps = 2* this._currentAttributes.n-1;
+      var start = 1- this._currentAttributes.n;
+      for(var i = 0; i < reps; i++){
+        if(this.hasMajorDiagonalConflictAt(start + i)){
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -124,6 +193,7 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+
       return false; // fixme
     },
 
