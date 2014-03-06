@@ -16,8 +16,40 @@
 // [0,0,1],
 // [1,0,0],
 // ]
+
+// generate all solutions for n = 3
+
+var n3maker = function(){
+  var i;
+  var boardCount = 0;
+  var results = {};
+  for(i = 0; i < 3; i++){
+    for(var j =0; j < 3; j++){
+      for(var k = 0; k < 3; k++){
+        var start = [];
+        start.push([],[],[]);
+        for(var a = 0; a < start.length; a++){
+          start[a].push(0,0,0);
+        }
+        var subResults = start.slice();
+        subResults[0][i] = 1;
+        subResults[1][j] = 1;
+        subResults[2][k] = 1;
+        boardCount++;
+        results[boardCount] = subResults.slice();
+      }
+    }
+  }
+  console.log(results);
+  return results;
+}();
+
+
+
 window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
+
+
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
