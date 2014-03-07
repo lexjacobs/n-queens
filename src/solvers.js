@@ -55,7 +55,7 @@ var n3maker = function(){
 
  console.log(boardSet);
 
-
+//
 
 
 window.findNRooksSolution = function(n) {
