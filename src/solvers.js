@@ -19,24 +19,38 @@
 
 // generate all solutions for n = 3
 
-var naiveBoardMaker = function(n){
-var i;
-var j;
-var emptyBoards = [];
-var results = [];
+var emptyBoardMaker = function(n){
+  var i;
+  var j;
+  var emptyBoards = [];
+  var results = [];
 
-for(i = 0; i < n; i++){
-var boardRow = [];
-  for(j = 0; j < n; j++){
-    boardRow.push(0);
+  for(i = 0; i < n; i++){
+    var boardRow = [];
+    for(j = 0; j < n; j++){
+      boardRow.push(0);
+    }
+    emptyBoards.push(boardRow);
   }
-  emptyBoards.push(boardRow);
-}
+  return emptyBoards;
+};
 
-console.log(emptyBoards);
+var naiveBoardsMaker = function(n){
+  var outcomes = [];
+  var start = emptyBoardMaker(n).slice();
+
+  var recurser = function(){
+  };
+  recurser(n);
+  return start;
+};
 
 
-return emptyBoards;
+
+
+
+
+return results;
 };
 
 
