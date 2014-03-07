@@ -19,6 +19,29 @@
 
 // generate all solutions for n = 3
 
+var naiveBoardMaker = function(n){
+var i;
+var j;
+var emptyBoards = [];
+var results = [];
+
+for(i = 0; i < n; i++){
+var boardRow = [];
+  for(j = 0; j < n; j++){
+    boardRow.push(0);
+  }
+  emptyBoards.push(boardRow);
+}
+
+console.log(emptyBoards);
+
+
+return emptyBoards;
+};
+
+
+
+
 var n3maker = function(){
   var i;
   var boardCount = 0;
