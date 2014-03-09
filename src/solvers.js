@@ -12,9 +12,93 @@
 
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
+// [[0,1,0],
+// [0,0,1],
+// [1,0,0],
+// ]
+
+// generate all solutions for n = 3
+
+var emptyBoardMaker = function(n){
+  var i;
+  var j;
+  var emptyBoards = [];
+  var results = [];
+
+  for(i = 0; i < n; i++){
+    var boardRow = [];
+    for(j = 0; j < n; j++){
+      boardRow.push(0);
+    }
+    emptyBoards.push(boardRow);
+  }
+  return emptyBoards;
+};
+
+var naiveBoardsMaker = function(n){
+  var outcomes = [];
+  var start = emptyBoardMaker(n).slice();
+
+  var recurser = function(){
+  };
+  recurser(n);
+  return start;
+};
+
+
+
+
+
+
+return results;
+};
+
+
+
+
+var n3maker = function(){
+  var i;
+  var boardCount = 0;
+  var results = {};
+  for(i = 0; i < 3; i++){
+    for(var j =0; j < 3; j++){
+      for(var k = 0; k < 3; k++){
+        var start = [];
+        start.push([],[],[]);
+        for(var a = 0; a < start.length; a++){
+          start[a].push(0,0,0);
+        }
+        var subResults = start.slice();
+        subResults[0][i] = 1;
+        subResults[1][j] = 1;
+        subResults[2][k] = 1;
+        boardCount++;
+        results[boardCount] = subResults.slice();
+      }
+    }
+  }
+  //console.log(results);
+  return results;
+};
+
+ var boardSet = n3maker();
+
+ for( var n in boardSet){
+  var thisBoard = new Board(boardSet[n]);
+     if(thisBoard.hasAnyColConflicts()){
+      delete boardSet[n];
+     }
+ }
+
+ console.log(boardSet);
+
+//
+
 
 window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
+
+
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
