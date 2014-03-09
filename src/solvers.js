@@ -10,6 +10,22 @@
 // (There are also optimizations that will allow you to skip a lot of the dead search space)
 // take a look at solversSpec.js to see what the tests are expecting
 
+var anagrams = function(str){
+  var results = [];
+  if(str.length < 2){
+    return [str];
+  } else {
+    for(var i = 0; i < str.length; i++){
+      var letter = str[i];
+      var trimmedStr = str.substr(0, i) + str.substr(i+1, str.length-1);
+      var trimmedStrArray = allAnagrams(trimmedStr);
+      for (var j = 0; j < trimmedStrArray.length; j++) {
+        results.push(letter + trimmedStrArray[j]);
+      }
+    }
+  }
+  return results;
+};
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 // [[0,1,0],
