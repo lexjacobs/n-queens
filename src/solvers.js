@@ -18,7 +18,7 @@ var anagrams = function(str){
     for(var i = 0; i < str.length; i++){
       var letter = str[i];
       var trimmedStr = str.substr(0, i) + str.substr(i+1, str.length-1);
-      var trimmedStrArray = allAnagrams(trimmedStr);
+      var trimmedStrArray = anagrams(trimmedStr);
       for (var j = 0; j < trimmedStrArray.length; j++) {
         results.push(letter + trimmedStrArray[j]);
       }
@@ -26,6 +26,53 @@ var anagrams = function(str){
   }
   return results;
 };
+
+var boardNumberPreparer = function(n){
+  var boardAnagramSeed = [];
+  for(var i = 0; i < n; i ++){
+    boardAnagramSeed.push(i);
+  }
+  //console.log(boardAnagramSeed);
+  return boardAnagramSeed.join("");
+};
+
+var naiveBoardSetGenerator = function(n){
+  var finalBoardArray = [];
+  var boardSeedArray = anagrams(boardNumberPreparer(n));
+  // boardSeedArray: [ '012', '021', '102', '120', '201', '210' ]
+  // for each set of number in boardSeed Array:
+  for (var i = 0; i < boardSeedArray.length; i++) {
+    
+    // initialize an empty array which will represent a single board:
+    var singleBoard = [];
+
+    // for each row of each single board:
+    for(var j = 0; j < n; j++){
+      var singleRow = [];
+
+      // for each board space of each single row:
+      for(var k = 0; k < n; k++){
+        if(k === +boardSeedArray[i][j]){
+          singleRow.push(1);
+        } else {
+          singleRow.push(0);
+        }
+      }
+      singleBoard.push(singleRow);
+    }
+    finalBoardArray.push(singleBoard);
+  }
+  console.log(finalBoardArray);
+  return finalBoardArray;
+};
+
+// naiveBoardSetGenerator returns for n(2):
+// [ [ [ 1, 0 ], [ 0, 1 ] ], [ [ 0, 1 ], [ 1, 0 ] ] ]
+// this is a set of boards that can be iterated over. the solution for
+// rooks is self-contained. for queens, check for diagonal conflicts.
+
+
+
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 // [[0,1,0],
@@ -35,39 +82,6 @@ var anagrams = function(str){
 
 // generate all solutions for n = 3
 
-var emptyBoardMaker = function(n){
-  var i;
-  var j;
-  var emptyBoards = [];
-  var results = [];
-
-  for(i = 0; i < n; i++){
-    var boardRow = [];
-    for(j = 0; j < n; j++){
-      boardRow.push(0);
-    }
-    emptyBoards.push(boardRow);
-  }
-  return emptyBoards;
-};
-
-var naiveBoardsMaker = function(n){
-  var outcomes = [];
-  var start = emptyBoardMaker(n).slice();
-
-  var recurser = function(){
-  };
-  recurser(n);
-  return start;
-};
-
-
-
-
-
-
-return results;
-};
 
 
 
